@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Employees · PeopleDesk{% endblock %}
+{% block content %}
+<div class="eyebrow">YOUR WORKSPACE</div>
+<div class="heading-row"><div><h1>Employees</h1><p class="muted">Manage your people and their details.</p></div><a class="button primary" href="{{ url_for('create_employee') }}"><span class="plus">＋</span> Add employee</a></div>
+<section class="stats"><div class="stat-icon">♙</div><div><div class="stat-label">TOTAL EMPLOYEES</div><div class="stat-number">{{ total }}</div></div></section>
+<section class="directory">
+  <div class="directory-head"><div><h2>Team directory</h2><p class="muted">A searchable list of your team members.</p></div>
+    <form class="search" method="get"><span>⌕</span><input name="q" value="{{ query }}" placeholder="Search employees..."><button aria-label="Search">Search</button></form>
+  </div>
+  {% if employees %}<div class="table-scroll"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>JOB TITLE</th><th></th></tr></thead><tbody>
+  {% for employee in employees %}<tr><td><div class="person"><span class="avatar">{{ employee.name[0]|upper }}</span><span><strong>{{ employee.name }}</strong><small>{{ employee.email }}</small></span></div></td><td><span class="pill">{{ employee.department }}</span></td><td>{{ employee.job_title }}</td><td><div class="actions"><a href="{{ url_for('edit_employee', employee_id=employee.id) }}">Edit</a><form method="post" action="{{ url_for('delete_employee', employee_id=employee.id) }}" onsubmit="return confirm('Delete {{ employee.name|e }}?')"><button class="delete" type="submit">Delete</button></form></div></td></tr>{% endfor %}
+  </tbody></table></div>{% else %}<div class="empty"><div class="empty-icon">♙</div><h3>{% if query %}No matches found{% else %}Your directory is ready{% endif %}</h3><p>{% if query %}Try another name, email, title, or department.{% else %}Add your first employee to get started.{% endif %}</p>{% if not query %}<a class="button primary" href="{{ url_for('create_employee') }}">Add your first employee</a>{% endif %}</div>{% endif %}
+</section>
+{% endblock %}

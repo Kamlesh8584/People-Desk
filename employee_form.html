@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }} · PeopleDesk{% endblock %}
+{% block content %}
+<div class="eyebrow"><a href="{{ url_for('index') }}">EMPLOYEES</a> / {{ page_title|upper }}</div>
+<section class="form-card"><h1>{{ page_title }}</h1><p class="muted">Enter the employee's details below.</p>
+  <form method="post" class="stack-form">
+    <label>Full name<input name="name" value="{{ employee.get('name', '') }}" placeholder="e.g. Aisha Patel" required maxlength="120"></label>
+    <label>Work email<input type="email" name="email" value="{{ employee.get('email', '') }}" placeholder="name@company.com" required maxlength="254"></label>
+    <div class="form-grid"><label>Department<input name="department" value="{{ employee.get('department', '') }}" placeholder="e.g. Engineering" required maxlength="100"></label><label>Job title<input name="job_title" value="{{ employee.get('job_title', '') }}" placeholder="e.g. Software Developer" required maxlength="100"></label></div>
+    <div class="form-actions"><a class="button secondary" href="{{ url_for('index') }}">Cancel</a><button class="button primary" type="submit">{{ submit_label }} <span>→</span></button></div>
+  </form>
+</section>
+{% endblock %}

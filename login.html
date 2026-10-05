@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Sign in · PeopleDesk{% endblock %}
+{% block content %}
+<section class="login-wrap"><div class="login-card">
+  <div class="eyebrow">EMPLOYEE DIRECTORY</div><h1>Welcome back</h1><p class="muted">Sign in to manage your team.</p>
+  <form method="post" class="stack-form">
+    <label>Username<input name="username" autocomplete="username" required autofocus></label>
+    <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+    <button class="button primary full" type="submit">Sign in <span>→</span></button>
+  </form>
+</div><p class="login-note">Local demo account: <strong>admin</strong> / <strong>admin123</strong></p></section>
+{% endblock %}
