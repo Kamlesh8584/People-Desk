@@ -5,8 +5,24 @@
   <div class="eyebrow">EMPLOYEE DIRECTORY</div><h1>Welcome back</h1><p class="muted">Sign in to manage your team.</p>
   <form method="post" class="stack-form">
     <label>Username<input name="username" autocomplete="username" required autofocus></label>
-    <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+    <label>Password
+      <span class="password-field">
+        <input id="login-password" type="password" name="password" autocomplete="current-password" required>
+        <button class="password-toggle" type="button" aria-controls="login-password" aria-label="Show password" aria-pressed="false">Show</button>
+      </span>
+    </label>
     <button class="button primary full" type="submit">Sign in <span>→</span></button>
   </form>
 </div></section>
+<script>
+  const passwordInput = document.getElementById("login-password");
+  const passwordToggle = document.querySelector(".password-toggle");
+  passwordToggle.addEventListener("click", () => {
+    const reveal = passwordInput.type === "password";
+    passwordInput.type = reveal ? "text" : "password";
+    passwordToggle.textContent = reveal ? "Hide" : "Show";
+    passwordToggle.setAttribute("aria-label", reveal ? "Hide password" : "Show password");
+    passwordToggle.setAttribute("aria-pressed", String(reveal));
+  });
+</script>
 {% endblock %}
